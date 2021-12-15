@@ -31,10 +31,29 @@ zodiac = {"aries": "Овен - первый знак зодиака, плане�
           }
 
 
+def index(request):
+    zodiacs = list(zodiac)
+    li_zodiac = ''
+    for sign in zodiacs:
+        puth_url = reverse('url_revers', args=[sign])
+        li_zodiac += f"<li><a href='{puth_url}'>{sign.title()}</a></li>"
+    response = f'''
+    <ul>
+        {li_zodiac}
+    </ul>
+    '''
+
+
+
+
+    return HttpResponse(response)
+
+
+
 def get_more_sigen_zodiac(request, sigen_zodiac: str):  # dynamic URLS
     description = zodiac.get(sigen_zodiac, None)
     if description:
-        return HttpResponse(description)
+        return HttpResponse(f'<h2>{description}</h2>')
     # if sigen_zodiac == 'leo':
     #     return HttpResponse('Zodiac sign Leo')
     # elif sigen_zodiac == 'scorpio':

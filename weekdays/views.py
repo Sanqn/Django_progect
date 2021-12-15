@@ -18,16 +18,31 @@ all_day = {
     'sunday': 'Nice Sunday, do nay stop',
 }
 
+def index(request):
+    days = list(all_day)
+    list_days = ''
+    for day_of in days:
+        redirect_days = reverse('revers_url_day', args=[day_of])
+        list_days += f"<li><a href='{redirect_days}'>{day_of}</a></li>"
+
+    click_day = f'''
+    <ul>
+    {list_days}
+    </ul>
+    '''
+    return HttpResponse(click_day)
+
 def create_day(request, new_day: str):
     week = all_day.get(new_day, None)
     if week:
-        return HttpResponse(week)
+        return HttpResponse(f'<h2>{week}</h2>')
     # if new_day == 'monday':
     #     return HttpResponse('Good day monday')
     # elif new_day == 'tuesday':
     #     return HttpResponse('Good day tuesday')
     else:
         return HttpResponseNotFound(f'{new_day} is not of week')
+
 
 def create_day_number(request, new_day: int):
     # if new_day <= 7:
@@ -40,3 +55,5 @@ def create_day_number(request, new_day: int):
     name_day = days[new_day - 1]
     urls_days = reverse('revers_url_day', args=[name_day])
     return HttpResponseRedirect(urls_days)
+
+
