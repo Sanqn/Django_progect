@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.urls import reverse
 
 # def monday(request):
 #     return HttpResponse('Good day monday')
@@ -29,7 +30,13 @@ def create_day(request, new_day: str):
         return HttpResponseNotFound(f'{new_day} is not of week')
 
 def create_day_number(request, new_day: int):
-    if new_day <= 7:
-        return HttpResponse(f'Today is {new_day} of the week')
-    else:
+    # if new_day <= 7:
+    #     return HttpResponse(f'Today is {new_day} of the week')
+    # else:
+    #     return HttpResponseNotFound(f'Unknown number day {new_day}')
+    days = list(all_day)
+    if new_day > len(days):
         return HttpResponseNotFound(f'Unknown number day {new_day}')
+    name_day = days[new_day - 1]
+    urls_days = reverse('revers_url_day', args=[name_day])
+    return HttpResponseRedirect(urls_days)

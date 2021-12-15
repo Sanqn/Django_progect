@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.urls import reverse
 
 # def leo(request):
 #     return HttpResponse('Zodiac sign Leo')
@@ -52,7 +53,8 @@ def get_more_sigen_zodiac_by_number(request, sigen_zodiac: int):
     if sigen_zodiac > len(zodiacs):
         return HttpResponseNotFound(f'Unknown sign number of zodiac {sigen_zodiac}')
     name_zodiac = zodiacs[sigen_zodiac - 1]
-    return HttpResponseRedirect(f'/web/{name_zodiac}')
+    new_revers_url = reverse('url_revers', args=[name_zodiac])
+    return HttpResponseRedirect(new_revers_url)
 
 
 # def get_four_digits(request, sigen_zodiac):
