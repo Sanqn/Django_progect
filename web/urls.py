@@ -8,6 +8,8 @@ urlpatterns = [
     # path('<my_date:sigen_zodiac>/', views.get_date),  # dynamic URLS
     # path('<yyyy:sigen_zodiac>/', views.get_four_digits),  # dynamic URLS
     path('', views.index),  # dynamic URLS
+    path('type/', views.type),
+    path('type/<type_sign>/', views.get_type_sign, name='url_type'),
     path('<int:sigen_zodiac>/', views.get_more_sigen_zodiac_by_number),  # dynamic URLS
     path('<str:sigen_zodiac>/', views.get_more_sigen_zodiac, name='url_revers'), # dynamic URLS
     # path('leo', views.leo),

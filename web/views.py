@@ -30,6 +30,12 @@ zodiac = {"aries": "Овен - первый знак зодиака, плане�
           "pisces": "Рыбы - двенадцатый знак зодиака, планеты Юпитер (с 20 февраля по 20 марта)"
           }
 
+types = {
+    'fire': ['aries', 'leo', 'sagittarius'],
+    'ears': ['taurus', 'virgo', 'capricorn'],
+    'air': ['gemini', 'libra', 'aquarius'],
+    'water': ['cancer', 'scorpio', 'pisces'],
+}
 
 def index(request):
     zodiacs = list(zodiac)
@@ -42,12 +48,7 @@ def index(request):
         {li_zodiac}
     </ul>
     '''
-
-
-
-
     return HttpResponse(response)
-
 
 
 def get_more_sigen_zodiac(request, sigen_zodiac: str):  # dynamic URLS
@@ -75,6 +76,32 @@ def get_more_sigen_zodiac_by_number(request, sigen_zodiac: int):
     new_revers_url = reverse('url_revers', args=[name_zodiac])
     return HttpResponseRedirect(new_revers_url)
 
+def type(request):
+    type_sign = list(types)
+    list_type_sign = ''
+    for typ in type_sign:
+        link_tupe_sign = reverse('url_type', args=[typ])
+        list_type_sign += f"<li><a href='{link_tupe_sign}'>{typ}</a></li>"
+    resource = f'''
+    <ul>
+        {list_type_sign}
+    </ul>
+    '''
+    return HttpResponse(resource)
+
+def get_type_sign(request, type_sign):
+    sign_of_type = types.get(type_sign, None)
+    if sign_of_type:
+        list_type_one_sign = ''
+        for four in sign_of_type:
+            link_tupe_one_sign = reverse('url_revers', args=[four])
+            list_type_one_sign += f"<li><a href='{link_tupe_one_sign}'>{four}</a></li>"
+        resource = f'''
+            <ul>
+                {list_type_one_sign}
+            </ul>
+            '''
+        return HttpResponse(resource)
 
 # def get_four_digits(request, sigen_zodiac):
 #     return HttpResponse(f'This is page {sigen_zodiac}')
