@@ -150,6 +150,7 @@ zodiac = {
          }
 }
 
+
 def index(request):
     zodiacs = list(zodiac)
     li_zodiac = ''
@@ -164,10 +165,27 @@ def index(request):
     return HttpResponse(response)
 
 
+class Person:
+
+    def __init__(self, name, age):
+        self.name = str(name)
+        self.age = int(age)
+
+    def __str__(self):
+        return f'Hi, my name is {self.name} and me {self.age} years old.'
+
+
 def get_more_sigen_zodiac(request, sigen_zodiac: str):  # dynamic URLS
-    response = render_to_string('djangoweb/info_djangoweb.html')
-    return HttpResponse(response)
-    # description = zodiac.get([sigen_zodiac[sign]['description'] for sign in sigen_zodiac], None)
+    all = zodiac.get(sigen_zodiac, None)
+    description = all.get('description', None)
+    data = {'description_zodiac': description,
+            'sign_of_zodiac': sigen_zodiac.title(),
+            'dict_list': {'name': 'Bil', 'age': 17},
+            'class_list': Person('Nick', 18)
+            }
+    return render(request, 'djangoweb/info_djangoweb.html', data)
+    # response = render_to_string('djangoweb/info_djangoweb.html')
+    # return HttpResponse(response)
     # all = zodiac.get(sigen_zodiac, None)
     # description = all.get('description', None)
     # if description:
@@ -185,6 +203,7 @@ def get_more_sigen_zodiac(request, sigen_zodiac: str):  # dynamic URLS
     # else:
     #     return HttpResponseNotFound(f'Unknown sign zodiac {sigen_zodiac}')
 
+
 def get_more_sigen_zodiac_by_number(request, sigen_zodiac: int):
     zodiacs = list(zodiac)
     if sigen_zodiac > len(zodiacs):
@@ -192,6 +211,7 @@ def get_more_sigen_zodiac_by_number(request, sigen_zodiac: int):
     name_zodiac = zodiacs[sigen_zodiac - 1]
     new_revers_url = reverse('url_revers', args=[name_zodiac])
     return HttpResponseRedirect(new_revers_url)
+
 
 def type(request):
     type_sign = list(types)
@@ -221,6 +241,7 @@ def get_type_sign(request, type_sign):
         '''
         return HttpResponse(resource)
 
+
 # def get_four_digits(request, sigen_zodiac):
 #     return HttpResponse(f'This is page {sigen_zodiac}')
 #
@@ -233,6 +254,6 @@ def check_day(request, month, day):
         return HttpResponseNotFound(f'<h2>This page not found</h2>')
     else:
         for i in zodiac:
-            if (day >= zodiac[i]['day_start'] and month == zodiac[i]['month_start']) or (day <= zodiac[i]['day_finish'] and month == zodiac[i]['month_finish']):
+            if (day >= zodiac[i]['day_start'] and month == zodiac[i]['month_start']) or (
+                    day <= zodiac[i]['day_finish'] and month == zodiac[i]['month_finish']):
                 return HttpResponse(f"<h2>{zodiac[i]['si']}</h2>")
-
