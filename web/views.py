@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
+from django.template.loader import render_to_string
 
 # def leo(request):
 #     return HttpResponse('Zodiac sign Leo')
@@ -164,11 +165,13 @@ def index(request):
 
 
 def get_more_sigen_zodiac(request, sigen_zodiac: str):  # dynamic URLS
+    response = render_to_string('djangoweb/info_djangoweb.html')
+    return HttpResponse(response)
     # description = zodiac.get([sigen_zodiac[sign]['description'] for sign in sigen_zodiac], None)
-    all = zodiac.get(sigen_zodiac, None)
-    description = all.get('description', None)
-    if description:
-        return HttpResponse(f'<h2>{description}</h2>')
+    # all = zodiac.get(sigen_zodiac, None)
+    # description = all.get('description', None)
+    # if description:
+    #     return HttpResponse(f'<h2>{description}</h2>')
     # if sigen_zodiac == 'leo':
     #     return HttpResponse('Zodiac sign Leo')
     # elif sigen_zodiac == 'scorpio':
@@ -179,8 +182,8 @@ def get_more_sigen_zodiac(request, sigen_zodiac: str):  # dynamic URLS
     #     return HttpResponse('Zodiac sign Taurus')
     # elif sigen_zodiac == 'gemini':
     #     return HttpResponse('Zodiac sign Gemini')
-    else:
-        return HttpResponseNotFound(f'Unknown sign zodiac {sigen_zodiac}')
+    # else:
+    #     return HttpResponseNotFound(f'Unknown sign zodiac {sigen_zodiac}')
 
 def get_more_sigen_zodiac_by_number(request, sigen_zodiac: int):
     zodiacs = list(zodiac)
