@@ -2,12 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Djangoweb zodiac is {{sign_of_zodiac}}</title>
+    <title>Djangoweb zodiac is {{sign_of_zodiac|title}}</title>
 </head>
 <body>
     <h1>Plugin about web_zodiac</h1>
-    <h2>{{description_zodiac}}</h2> <!--key into the file views - def get_more_sigen_zodiac(data)-->
+    {%if description_zodiac is None%}
+        <p>You input unknown sign of zodiac {{sign_of_zodiac}}</p>
+
+    {%else%}
+        <p><h2>{{description_zodiac}}</h2></p>
+    {%endif%}
+    {%if list_of|length >= 3 %}
+        <p>List have {{list_of}} elements</p>
+    {%elif list_of|length == 1 %}
+            <p>List have {{list_of}} elements</p>
+    {%else%}
+        <p><h2>List is empty {{list_of}}</h2></p>
+    {%endif%}
+    <h2><i>{{description_zodiac}}</i></h2> <!--key into the file views - def get_more_sigen_zodiac(data)-->
     <p>{{dict_list}}, key is name={{dict_list.name}} and age {{dict_list.age}}</p>
     <p>{{class_list}} {{class_list.age}}</p>
+    <p>{{ value|default:"nothing" }}</p>
+
+
+<!--https://docs.djangoproject.com/en/3.2/ref/templates/builtins/#built-in-filter-reference-->
 </body>
 </html>

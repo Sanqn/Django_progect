@@ -177,13 +177,20 @@ class Person:
 
 def get_more_sigen_zodiac(request, sigen_zodiac: str):  # dynamic URLS
     all = zodiac.get(sigen_zodiac, None)
-    description = all.get('description', None)
+    if all is None:
+        description = None
+    else:
+        description = all.get('description', None)
     data = {'description_zodiac': description,
-            'sign_of_zodiac': sigen_zodiac.title(),
+            'sign_of_zodiac': sigen_zodiac,
             'dict_list': {'name': 'Bil', 'age': 17},
-            'class_list': Person('Nick', 18)
+            'class_list': Person('Nick', 18),
+            'value': '',
+            'list_of': [],
             }
-    return render(request, 'djangoweb/info_djangoweb.html', data)
+    return render(request, 'djangoweb/info_djangoweb.html', context=data)
+    # else:
+    #     return HttpResponseNotFound(f'Unknown sign zodiac {sigen_zodiac}')
     # response = render_to_string('djangoweb/info_djangoweb.html')
     # return HttpResponse(response)
     # all = zodiac.get(sigen_zodiac, None)
