@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Menu</title>
-</head>
-<body>
+{% extends 'base.html' %}
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Menu</title>-->
+{% block title %}
+    Menu
+{% endblock %}
+<!--</head>-->
+<!--<body>-->
+{% block content %}
     <ul>
     {%for zodiac in zodiacs%}
         <li><a href="{%url 'url_revers' sigen_zodiac=zodiac%}">{{ zodiac|title }}</a></li>
@@ -17,11 +22,12 @@
 <!--        {%endif%}-->
     {%endfor%}
     </ul>
+{% endblock %}
 <!--    <ul>-->
 <!--    {%for key, value in zodiac.items%}-->
 <!--        <li>{{key}} {{value.description}}</li>-->
 <!--    {%endfor%}-->
 <!--    </ul>-->
 
-</body>
-</html>
+<!--</body>-->
+<!--</html>-->
