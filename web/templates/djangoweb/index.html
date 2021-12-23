@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+</head>
+<body>
+    <ul>
+    {%for zodiac in zodiacs%}
+        <li><a href="{%url 'url_revers' sigen_zodiac=zodiac%}">{{ zodiac|title }}</a></li>
+<!--        {%if forloop.first%}-->
+<!--            <li><b>{{forloop.counter}} {{ zodiac|title }}</b></li>-->
+<!--        {%elif forloop.last%}-->
+<!--            <li style="color:blue">{{forloop.counter}} {{ zodiac|title }}</li>-->
+<!--        {%else%}-->
+<!--            <li>{{forloop.counter}} {{ zodiac|title }}</li>-->
+<!--        {%endif%}-->
+    {%endfor%}
+    </ul>
+<!--    <ul>-->
+<!--    {%for key, value in zodiac.items%}-->
+<!--        <li>{{key}} {{value.description}}</li>-->
+<!--    {%endfor%}-->
+<!--    </ul>-->
+
+</body>
+</html>

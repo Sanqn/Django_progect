@@ -153,16 +153,22 @@ zodiac = {
 
 def index(request):
     zodiacs = list(zodiac)
-    li_zodiac = ''
-    for sign in zodiacs:
-        puth_url = reverse('url_revers', args=[sign])
-        li_zodiac += f"<li><a href='{puth_url}'>{sign.title()}</a></li>"
-    response = f'''
-    <ul>
-        {li_zodiac}
-    </ul>
-    '''
-    return HttpResponse(response)
+    context = {
+        'zodiacs': zodiacs,
+        'zodiac': zodiac
+    }
+    return render(request, 'djangoweb/index.html', context=context)
+    # zodiacs = list(zodiac)
+    # li_zodiac = ''
+    # for sign in zodiacs:
+    #     puth_url = reverse('url_revers', args=[sign])
+    #     li_zodiac += f"<li><a href='{puth_url}'>{sign.title()}</a></li>"
+    # response = f'''
+    # <ul>
+    #     {li_zodiac}
+    # </ul>
+    # '''
+    # return HttpResponse(response)
 
 
 class Person:

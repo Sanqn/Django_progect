@@ -20,28 +20,38 @@ all_day = {
 
 def index(request):
     days = list(all_day)
-    list_days = ''
-    for day_of in days:
-        redirect_days = reverse('revers_url_day', args=[day_of])
-        list_days += f"<li><a href='{redirect_days}'>{day_of}</a></li>"
-
-    click_day = f'''
-    <ul>
-    {list_days}
-    </ul>
-    '''
-    return HttpResponse(click_day)
+    context = {
+        'days': days
+    }
+    return render(request, 'weekdays/index.html', context=context)
+    # list_days = ''
+    # for day_of in days:
+    #     redirect_days = reverse('revers_url_day', args=[day_of])
+    #     list_days += f"<li><a href='{redirect_days}'>{day_of}</a></li>"
+    #
+    # click_day = f'''
+    # <ul>
+    # {list_days}
+    # </ul>
+    # '''
+    # return HttpResponse(click_day)
 
 def create_day(request, new_day: str):
-    week = all_day.get(new_day, None)
-    if week:
-        return HttpResponse(f'<h2>{week}</h2>')
-    # if new_day == 'monday':
-    #     return HttpResponse('Good day monday')
-    # elif new_day == 'tuesday':
-    #     return HttpResponse('Good day tuesday')
-    else:
-        return HttpResponseNotFound(f'{new_day} is not of week')
+    describe_day = all_day.get(new_day)
+    context = {
+        'describe_day': describe_day,
+        'new_day': new_day,
+    }
+    return render(request, 'weekdays/info_weekdays.html', context=context)
+    # week = all_day.get(new_day, None)
+    # if week:
+    #     return HttpResponse(f'<h2>{week}</h2>')
+    # # if new_day == 'monday':
+    # #     return HttpResponse('Good day monday')
+    # # elif new_day == 'tuesday':
+    # #     return HttpResponse('Good day tuesday')
+    # else:
+    #     return HttpResponseNotFound(f'{new_day} is not of week')
 
 
 def create_day_number(request, new_day: int):
