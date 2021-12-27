@@ -4,24 +4,38 @@
 <!--<head>-->
 <!--    <meta charset="UTF-8">-->
 <!--    <title>Menu</title>-->
+{% load static %}
+
+{% block css %}
+ <link rel="stylesheet" href="{% static 'web/css/index.css' %}">
+{% endblock %}
+
 {% block title %}
     Menu
 {% endblock %}
 <!--</head>-->
 <!--<body>-->
 {% block content %}
-    <ul>
-    {%for zodiac in zodiacs%}
-        <li><a href="{%url 'url_revers' sigen_zodiac=zodiac%}">{{ zodiac|title }}</a></li>
-<!--        {%if forloop.first%}-->
-<!--            <li><b>{{forloop.counter}} {{ zodiac|title }}</b></li>-->
-<!--        {%elif forloop.last%}-->
-<!--            <li style="color:blue">{{forloop.counter}} {{ zodiac|title }}</li>-->
-<!--        {%else%}-->
-<!--            <li>{{forloop.counter}} {{ zodiac|title }}</li>-->
-<!--        {%endif%}-->
-    {%endfor%}
-    </ul>
+    {%include 'includes/navbar.html'%}
+<!--    <nav>-->
+<!--        <a href="/web">Главная</a> |-->
+<!--        <a href="https://ibank.bsb.by/" target="_blank">Источник</a>-->
+<!--    </nav>-->
+   <div class="main-menu">
+        <ul>
+        {%for zodiac in zodiacs%}
+            <li><a href="{%url 'url_revers' sigen_zodiac=zodiac%}">{{ zodiac|title }}</a></li>
+    <!--        {%if forloop.first%}-->
+    <!--            <li><b>{{forloop.counter}} {{ zodiac|title }}</b></li>-->
+    <!--        {%elif forloop.last%}-->
+    <!--            <li style="color:blue">{{forloop.counter}} {{ zodiac|title }}</li>-->
+    <!--        {%else%}-->
+    <!--            <li>{{forloop.counter}} {{ zodiac|title }}</li>-->
+    <!--        {%endif%}-->
+        {%endfor%}
+        </ul>
+    </div>
+    {%include 'includes/navbar.html'%}
 {% endblock %}
 <!--    <ul>-->
 <!--    {%for key, value in zodiac.items%}-->

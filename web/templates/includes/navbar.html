@@ -1,0 +1,10 @@
+<nav>
+    <a href="{% url 'url_index'%}">Главная</a> |
+    <a href="https://ibank.bsb.by/" target="_blank">Источник</a>
+    {%for zodiac in zodiacs%}
+    | <a href="{%url 'url_revers' sigen_zodiac=zodiac%}">{{ zodiac|title }}</a>
+    {%endfor%}
+</nav>
+<!--<p>переменная sign_of_zodiac - {{sign_of_zodiac}}</p>-->
+<!--<p>переменная description_zodiac - {{description_zodiac}}</p>-->
+<!--<p>переменная zodiacs - {{zodiacs}}</p>-->
